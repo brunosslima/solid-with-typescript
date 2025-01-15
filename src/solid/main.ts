@@ -1,9 +1,12 @@
 import { Messaging } from './services/messaging';
-import { Order } from './entities/order';
-import { Product } from './entities/product';
-import { ShoppingCart } from './entities/shopping-cart';
+import { Order } from './class/order';
+import { Product } from './class/product';
+import { ShoppingCart } from './class/shopping-cart';
+import { FivePercentDiscount } from './class/discount';
 
-const shoppingCart = new ShoppingCart();
+const fivePercentDiscount = new FivePercentDiscount();
+//const noDiscount = new NoDiscount();
+const shoppingCart = new ShoppingCart(fivePercentDiscount);
 const messaging = new Messaging();
 const order = new Order(shoppingCart, messaging);
 
@@ -13,6 +16,7 @@ shoppingCart.addItem(new Product('Pencil', 1.59));
 
 console.log(shoppingCart.items);
 console.log(shoppingCart.total());
+console.log(shoppingCart.totalWithDiscount());
 console.log(order.orderStatus);
 order.checkout();
 console.log(order.orderStatus);
