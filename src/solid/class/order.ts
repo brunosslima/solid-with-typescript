@@ -22,7 +22,7 @@ export class Order {
 
     this._orderStatus = 'closed';
     this.messaging.sendMessage(
-      `Order processed successfully. Total $: ${this.cart.total()}`,
+      `Order processed successfully. Total $: ${this.cart.totalWithDiscount()}`,
     );
     this.saveOrder();
     this.cart.clear();
